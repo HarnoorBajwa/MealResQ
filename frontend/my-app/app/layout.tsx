@@ -8,7 +8,7 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "FoodConnectNS – Reducing Waste, Feeding Nova Scotia",
+  title: "MealResQ – Reducing Waste, Feeding Nova Scotia",
   description:
     "Connect restaurants, food banks, and drivers to reduce food waste and feed communities across Nova Scotia",
   generator: "v0.app",

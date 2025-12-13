@@ -35,8 +35,9 @@ python app.py
 ### Frontend Setup
 
 ```bash
-cd frontend
+cd frontend/my-app
 npm install
+npm run build
 npm start
 ```
 

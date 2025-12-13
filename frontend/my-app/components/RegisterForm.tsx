@@ -6,7 +6,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { UserRole } from "@/lib/types"
-import { authAPI } from "@/lib/api"
 import { ArrowLeft, Loader2 } from "lucide-react"
 
 interface RegisterFormProps {
