@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distance Popup Demo - MealResQ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Custom styles for the demo */
+        .gradient-bg {
+            background: linear-gradient(135deg, #dbeafe 0%, #dcfce7 100%);
+        }
+        .coordinate-box {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+    <!-- Backdrop -->
+    <div class="fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+    
+    <!-- Modal -->
+    <div class="relative z-50 bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+        <!-- Header -->
+        <div class="flex items-center justify-between p-6 border-b">
+            <div>
+                <h2 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+                    </svg>
+                    Distance & Route Information
+                </h2>
+                <p class="text-sm text-gray-600 mt-1">
+                    Distance between <strong>Donor</strong> and <strong>Food Bank</strong> locations.
+                </p>
+            </div>
+            <button class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Content -->
+        <div class="p-6 space-y-6">
+            <!-- Distance Information Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex items-center gap-3 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path>
+                    </svg>
+                    <div>
+                        <p class="text-sm text-gray-600">Distance</p>
+                        <p class="text-xl font-bold text-blue-800">1.38 km</p>
+                        <p class="text-sm text-blue-600">(0.86 miles)</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 p-4 bg-green-50 rounded-lg border border-green-200">
+                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <div>
+                        <p class="text-sm text-gray-600">Est. Travel Time</p>
+                        <p class="text-xl font-bold text-green-800">~2 min</p>
+                        <p class="text-sm text-green-600">by car</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coordinates Section -->
+            <div class="space-y-4">
+                <h3 class="font-semibold text-gray-900 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    Location Coordinates
+                </h3>
+                
+                <!-- Donor Location -->
+                <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg border">
+                    <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <div class="flex-1">
+                        <p class="font-medium text-gray-900">Donor</p>
+                        <p class="text-sm text-gray-600 mb-2">2225 Monastery Ln, Halifax, NS, Canada</p>
+                        <p class="text-sm coordinate-box text-gray-500 bg-white px-2 py-1 rounded border">
+                            44.6472976, -63.5971402
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Food Bank Location -->
+                <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg border">
+                    <svg class="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <div class="flex-1">
+                        <p class="font-medium text-gray-900">Food Bank</p>
+                        <p class="text-sm text-gray-600 mb-2">5511 Bloomfield St, Halifax, NS, Canada</p>
+                        <p class="text-sm coordinate-box text-gray-500 bg-white px-2 py-1 rounded border">
+                            44.6595959, -63.594955
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="flex gap-3">
+                    <button class="flex-1 flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                        </svg>
+                        Copy Coordinates
+                    </button>
+                    <button class="flex-1 flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+                        </svg>
+                        Open in Maps
+                    </button>
+                </div>
+            </div>
+
+            <!-- Map Placeholder -->
+            <div class="space-y-3">
+                <h3 class="font-semibold text-gray-900">Route Visualization</h3>
+                <div class="aspect-video gradient-bg rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
+                    <div class="text-center">
+                        <svg class="w-12 h-12 text-gray-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <p class="text-gray-500 font-medium">Interactive Map</p>
+                        <p class="text-xs text-gray-400 mt-1">Google Maps integration coming soon</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="flex justify-end p-6 border-t bg-gray-50">
+            <button class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- Demo Info -->
+    <div class="fixed top-4 left-4 bg-white p-4 rounded-lg shadow-lg max-w-sm">
+        <h3 class="font-semibold text-gray-900 mb-2">🎯 Distance Popup Demo</h3>
+        <p class="text-sm text-gray-600 mb-2">This shows how the distance popup will look in the Food Bank dashboard.</p>
+        <div class="text-xs text-gray-500 space-y-1">
+            <p><strong>Distance:</strong> 1.38 km (0.86 miles)</p>
+            <p><strong>Travel Time:</strong> ~2 minutes by car</p>
+            <p><strong>Features:</strong> Copy coordinates, Open in Maps</p>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactivity for demo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Copy coordinates button
+            const copyBtn = document.querySelector('button:first-of-type');
+            copyBtn.addEventListener('click', function() {
+                alert('Coordinates copied to clipboard!\n\nDonor: 44.6472976, -63.5971402\nFood Bank: 44.6595959, -63.594955');
+            });
+
+            // Open in Maps button
+            const mapsBtn = document.querySelector('button:last-of-type');
+            mapsBtn.addEventListener('click', function() {
+                const mapsUrl = 'https://www.google.com/maps/dir/44.6472976,-63.5971402/44.6595959,-63.594955';
+                window.open(mapsUrl, '_blank');
+            });
+
+            // Close button
+            const closeBtn = document.querySelector('button[class*="hover:bg-gray-100"]');
+            closeBtn.addEventListener('click', function() {
+                alert('Modal would close here');
+            });
+        });
+    </script>
+</body>
+</html>
