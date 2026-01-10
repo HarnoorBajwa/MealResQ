@@ -16,7 +16,7 @@ Every day, restaurants have leftover food that could help people in need. Our pl
 ## 🏗️ Architecture
 
 - **Backend**: Flask + Firebase (Real-time notifications, Auto-escalation)
-- **Frontend**: React (Real-time UI updates)
+- **Frontend**: React (Next.js) (Real-time UI updates)
 - **Database**: Firebase Firestore (Real-time sync)
 - **Notifications**: WebSocket (Instant alerts)
 
