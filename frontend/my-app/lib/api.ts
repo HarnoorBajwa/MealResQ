@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:5000/api'
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ||'http://localhost:5000'
 
 export interface DistanceRequest {
   address1: string
@@ -150,7 +150,7 @@ export type FoodItemUnit = "servings" | "kg" | "lbs" | "pieces" | "loaves" | "po
 // API client functions
 export const utilityAPI = {
   calculateDistance: async (request: DistanceRequest): Promise<DistanceResponse> => {
-    const response = await fetch(`${API_BASE_URL}/utility/distance`, {
+    const response = await fetch(`${API_BASE_URL}/api/utility/distance`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -169,7 +169,7 @@ export const utilityAPI = {
 
 export const alertAPI = {
   create: async (data: any, token: string): Promise<{ alert: FoodAlert }> => {
-    const response = await fetch(`${API_BASE_URL}/alerts`, {
+    const response = await fetch(`${API_BASE_URL}/api/alerts`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -198,7 +198,7 @@ export const alertAPI = {
     if (filters.foodbank_id) params.append('foodbank_id', filters.foodbank_id)
     if (filters.driver_id) params.append('driver_id', filters.driver_id)
     
-    const response = await fetch(`${API_BASE_URL}/alerts?${params}`, {
+    const response = await fetch(`${API_BASE_URL}/api/alerts?${params}`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -213,7 +213,7 @@ export const alertAPI = {
   },
 
   accept: async (alertId: string, foodbankId: string, token: string): Promise<{ alert: FoodAlert }> => {
-    const response = await fetch(`${API_BASE_URL}/alerts/${alertId}/accept`, {
+    const response = await fetch(`${API_BASE_URL}/api/alerts/${alertId}/accept`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -231,7 +231,7 @@ export const alertAPI = {
   },
 
   assignDriver: async (alertId: string, driverId: string, token: string): Promise<{ alert: FoodAlert }> => {
-    const response = await fetch(`${API_BASE_URL}/alerts/${alertId}/assign-driver`, {
+    const response = await fetch(`${API_BASE_URL}/api/alerts/${alertId}/assign-driver`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -249,7 +249,7 @@ export const alertAPI = {
   },
 
   updateStatus: async (alertId: string, status: string, token: string): Promise<{ alert: FoodAlert }> => {
-    const response = await fetch(`${API_BASE_URL}/alerts/${alertId}/status`, {
+    const response = await fetch(`${API_BASE_URL}/api/alerts/${alertId}/status`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -269,7 +269,7 @@ export const alertAPI = {
 
 export const driverAPI = {
   getAvailable: async (token: string): Promise<{ drivers: Driver[] }> => {
-    const response = await fetch(`${API_BASE_URL}/drivers/available`, {
+    const response = await fetch(`${API_BASE_URL}/api/drivers/available`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -284,7 +284,7 @@ export const driverAPI = {
   },
 
   updateAvailability: async (driverId: string, isAvailable: boolean, token: string): Promise<{ driver: Driver }> => {
-    const response = await fetch(`${API_BASE_URL}/drivers/${driverId}/availability`, {
+    const response = await fetch(`${API_BASE_URL}/api/drivers/${driverId}/availability`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

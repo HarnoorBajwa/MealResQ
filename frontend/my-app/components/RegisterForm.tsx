@@ -54,7 +54,7 @@ export default function RegisterForm({ role, onSuccess, onBack }: RegisterFormPr
     try {
       // Create profile based on role using the appropriate endpoint
       let response;
-      const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+      const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
       
       const profileData: any = {
         name: formData.name,
@@ -66,7 +66,7 @@ export default function RegisterForm({ role, onSuccess, onBack }: RegisterFormPr
       if (role === "restaurant") {
         // POST /api/restaurants
         profileData.contact_person = formData.name;
-        response = await fetch(`${API_BASE}/restaurants`, {
+        response = await fetch(`${API_BASE}/api/restaurants`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(profileData)
@@ -77,7 +77,7 @@ export default function RegisterForm({ role, onSuccess, onBack }: RegisterFormPr
         if (formData.capacity) {
           profileData.capacity = parseInt(formData.capacity);
         }
-        response = await fetch(`${API_BASE}/foodbanks`, {
+        response = await fetch(`${API_BASE}/api/foodbanks`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(profileData)
@@ -86,7 +86,7 @@ export default function RegisterForm({ role, onSuccess, onBack }: RegisterFormPr
         // POST /api/drivers
         profileData.license_number = `DL${Date.now()}`;
         profileData.vehicle_type = formData.vehicleType || "Car";
-        response = await fetch(`${API_BASE}/drivers`, {
+        response = await fetch(`${API_BASE}/api/drivers`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(profileData)
